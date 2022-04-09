@@ -11,8 +11,8 @@
       </div>
     </template>
     <template v-if="isLogin">
-      <h1>Let's share</h1>
-      <i class="edit el-icon-edit"></i>
+      <h1><router-link to="/"> Let's share</router-link></h1>
+      <router-link to="/create"><i class="edit el-icon-plus"></i></router-link>
       <div class="user">
         <img
           class="avatar"
@@ -32,8 +32,8 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-// import auth from "@/api/auth";
-// window.auth = auth;
+import auth from "@/api/auth";
+window.auth = auth;
 
 export default {
   data() {
@@ -97,10 +97,13 @@ header.login {
   h1 {
     margin: 0;
     padding: 0;
-    color: #fff;
     font-size: 40px;
     text-transform: uppercase;
     flex: 1;
+
+    a {
+      color: #fff;
+    }
   }
 
   .edit {

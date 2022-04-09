@@ -1,25 +1,59 @@
 <template>
   <div id="detail">
     <section class="user-info">
-      <img src="../assets/1.png" alt="" class="avatar" />
-      <h3>前端异步大揭秘</h3>
-      <p><router-link to="/user">若愚</router-link> 发布于3天前</p>
+      <img
+        :src="user.avatar"
+        :alt="user.name"
+        :title="user.username"
+        class="avatar"
+      />
+      <h3>{{ title }}</h3>
+      <p>
+        <router-link :to="`/user/${user.id}`">{{ user.username }}</router-link>
+        发布于{{ friendlyDate(createdAt) }}
+      </p>
     </section>
+    <section class="article" v-html="markdown"></section>
   </div>
 </template>
 
 <script>
+import { marked } from "marked";
+import blog from "@/api/blog";
 export default {
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      title: "",
+      rawContent: "",
+      user: {},
+      createdAt: "",
     };
+  },
+
+  created() {
+    //这个blogId是页面url的id  此id是在router的index.js里写的 所以params有blogId这个属性
+    this.blogId = this.$route.params.blogId;
+    blog.getDetail({ blogId: this.blogId }).then((res) => {
+      console.log(res);
+      this.title = res.data.title;
+      this.rawContent = res.data.content;
+      this.createdAt = res.data.createdAt;
+      this.user = res.data.user;
+    });
+  },
+
+  //把markdown变成html
+  computed: {
+    markdown() {
+      return marked(this.rawContent);
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
 @import "~@/assets/base.less";
+@import "~@/assets/article.less";
 
 #detail {
   .user-info {

@@ -3,19 +3,44 @@
     <h4>用户名</h4>
     <input v-model="username" placeholder="用户名" />
     <h4>密码</h4>
-    <input v-model="password" type="password" placeholder="密码" />
-    <el-button size="medium">立即登录</el-button>
+    <!-- @key.up='onLogin'  按回车登录   @click="onLogin"点击登录 -->
+
+    <input
+      v-model="password"
+      type="password"
+      placeholder="密码"
+      @keyup.enter="onLogin"
+    />
+    <el-button size="medium" @click="onLogin">立即登录</el-button>
     <p class="notice">
       没有账号？<router-link to="/register">注册新用户</router-link>
     </p>
   </div>
 </template>
+
+
 <script>
+import { mapActions } from "vuex";
+
 export default {
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      username: "",
+      password: "",
     };
+  },
+
+  methods: {
+    ...mapActions(["login"]),
+
+    onLogin() {
+      this.login({ username: this.username, password: this.password }).then(
+        () => {
+          //调整到重定向的页面(未登录状态下去需要登录的页面 得到的参数redirect)或者首页
+          this.$router.push({ path: this.$route.query.redirect || "/" });
+        }
+      );
+    },
   },
 };
 </script>
@@ -47,7 +72,7 @@ export default {
   }
 
   button {
-    margin-top: 10px;
+    margin-top: 30px;
     justify-self: start;
   }
 

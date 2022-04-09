@@ -1,61 +1,65 @@
 <template>
   <div id="index">
     <section class="blog-posts">
-      <div class="item">
+      <router-link
+        v-for="blog in blogs"
+        :key="blog.id"
+        :to="`/detail/${blog.id}`"
+        class="item"
+      >
         <figure class="avatar">
-          <img src="../assets/1.png" />
-          <figcaption>若愚</figcaption>
+          <img :src="blog.user.avatar" :alt="blog.user.username" />
+          <figcaption>{{ blog.user.username }}}</figcaption>
         </figure>
-        <h3>前端异步大揭秘 <span>3天前</span></h3>
+        <h3>
+          {{ blog.title }}<span>{{ friendlyDate(blog.createdAt) }}</span>
+        </h3>
         <p>
-          本文以一个简单的文件读写为例，讲解了异步的不同写法，包括 普通的
-          callback、ES2016中的Promise和Generator、 Node 用于解决回调的co
-          模块、ES2017中的async/await。适合初步接触 Node.js以及少量
-          ES6语法的同学阅读...
+          {{ blog.description }}
         </p>
-      </div>
-      <div class="item">
-        <figure class="avatar">
-          <img src="../assets/1.png" alt="" />
-          <figcaption>若愚</figcaption>
-        </figure>
-        <h3>前端异步大揭秘 <span>3天前</span></h3>
-        <p>
-          本文以一个简单的文件读写为例，讲解了异步的不同写法，包括 普通的
-          callback、ES2016中的Promise和Generator、 Node 用于解决回调的co
-          模块、ES2017中的async/await。适合初步接触 Node.js以及少量
-          ES6语法的同学阅读...
-        </p>
-      </div>
+      </router-link>
+    </section>
+    <section class="pagination">
+      <!-- element-ui 分页组件 -->
+      <el-pagination
+        layout="prev,pager,next"
+        :total="total"
+        @current-change="onPageChange"
+      >
+      </el-pagination>
     </section>
   </div>
 </template>
 <script>
-import request from "@/helpers/request.js";
-import auth from "@/api/auth.js";
 import blog from "@/api/blog.js";
 
-window.request = request;
-window.auth = auth;
-window.blog = blog;
 export default {
   data() {
     return {
-      msg: "Welcome to Your Vue.js App",
+      blogs: [],
+      total: 0,
+      page: 1,
     };
   },
 
-  methods: {
-    onClick1() {
-      this.$message.error("错了哦，这是一条错误消息");
-    },
+  //created时 模板还未渲染 数据已经准备好  我们发请求拿到博客数据
+  created() {
+    this.page = parseInt(this.$route.query.page) || 1;
+    blog.getIndexBlogs({ page: this.page }).then((res) => {
+      this.blogs = res.data;
+      this.total = res.total;
+      this.page = res.page;
+    });
+  },
 
-    onClick2() {
-      this.$alert("这是一段内容", "标题名称", {
-        confirmButtonText: "确定",
-        callback: (action) => {
-          this.$message.success("点了确定");
-        },
+  methods: {
+    //页面改变时内容也改变  url也改变
+    onPageChange(newPage) {
+      blog.getIndexBlogs({ page: newPage }).then((res) => {
+        this.blogs = res.data;
+        this.total = res.total;
+        this.page = res.page;
+        this.$router.push({ path: "/", query: { page: newPage } });
       });
     },
   },
@@ -106,6 +110,11 @@ export default {
       grid-row: 2;
       margin-top: 0;
     }
+  }
+  .pagination {
+    display: grid;
+    justify-items: center;
+    margin-bottom: 30px;
   }
 }
 </style>
