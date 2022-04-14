@@ -43,4 +43,44 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import "~@/assets/base.less";
+
+#register {
+  display: grid;
+  justify-content: center;
+  padding-top: 30px;
+
+  h4 {
+    margin: 10px 0 5px;
+  }
+
+  p {
+    margin: 5px 0;
+  }
+
+  input {
+    width: 400px;
+  }
+
+  .error {
+    font-size: 12px;
+    color: #f00;
+  }
+
+  button {
+    margin-top: 30px;
+    justify-self: start;
+  }
+
+  .notice {
+    font-size: 12px;
+    color: @textLighterColor;
+    text-align: center;
+    margin-top: 30px;
+
+    a {
+      color: @themeColor;
+    }
+  }
+}
 </style>

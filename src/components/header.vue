@@ -1,15 +1,17 @@
 <template>
   <header :class="{ login: isLogin, 'no-login': !isLogin }">
+    <!-- 未登录状态 -->
     <template v-if="!isLogin">
       <h1>Let's share</h1>
       <p>精品博客汇聚</p>
-      <div class="btns">
+      <div class="btn">
         <router-link to="/login"><el-button>立即登录</el-button></router-link>
         <router-link to="/register"
           ><el-button>注册账号</el-button></router-link
         >
       </div>
     </template>
+    <!-- 登录状态 -->
     <template v-if="isLogin">
       <h1><router-link to="/"> Let's share</router-link></h1>
       <router-link to="/create"><i class="edit el-icon-plus"></i></router-link>
@@ -53,6 +55,7 @@ export default {
     ...mapActions(["checkLogin", "logout"]),
     onLogout() {
       this.logout();
+      // this.$router.replace("/index");
     },
   },
 };
@@ -80,7 +83,7 @@ header.no-login {
     color: #fff;
   }
 
-  .btns {
+  .btn {
     margin-top: 20px;
   }
 

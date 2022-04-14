@@ -18,7 +18,7 @@
       v-model="content"
       :autosize="{ minRows: 4, maxRows: 30 }"
     ></el-input>
-    <p class="msg">限30个字</p>
+    <p class="msg">多多益善</p>
     <p>
       <label>是否展示到首页</label>
       <el-switch

@@ -1,6 +1,6 @@
 <template>
   <footer>
-    <p>©2022</p>
+    <p>©2022努力奋斗</p>
   </footer>
 </template>
 
@@ -9,8 +9,8 @@ footer {
   align-self: end;
   background-color: #d7d7d7;
   color: #666;
-  font-size: 13px;
-  padding: 10px;
+  font-size: 10px;
+  padding: 0px;
   text-align: center;
 }
 </style>

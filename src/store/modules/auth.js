@@ -45,6 +45,7 @@ const actions = {
     await auth.logout();
     commit("setUser", { user: null });
     commit("setLogin", { isLogin: false });
+    // window.sessionStorage.clear();
   },
 
   //检查是否登录

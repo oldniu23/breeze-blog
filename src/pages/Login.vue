@@ -48,8 +48,10 @@ export default {
 <style lang="less" scoped>
 @import "~@/assets/base.less";
 
-#login,
-#register {
+// #login,
+// #register {  }  注册和登录的布局相同 可以这么写 这么写就不需要在注册页写相应的css了 但是需要去掉scoped
+
+#login {
   display: grid;
   justify-content: center;
   padding-top: 30px;
