@@ -1,6 +1,6 @@
 <template>
   <header :class="{ login: isLogin, 'no-login': !isLogin }">
-    <!-- 未登录状态 -->
+    <!-- 未登录的状态 -->
     <template v-if="!isLogin">
       <h1>Let's share</h1>
       <p>精品博客汇聚</p>
