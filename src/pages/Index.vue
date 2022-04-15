@@ -1,29 +1,29 @@
 <template>
   <div id="index">
     <section class="blog-posts">
-      <router-link
-        v-for="blog in blogs"
-        :key="blog.id"
-        :to="`/detail/${blog.id}`"
-        class="item"
-      >
-        <figure class="avatar">
-          <img :src="blog.user.avatar" :alt="blog.user.username" />
-          <figcaption>{{ blog.user.username }}}</figcaption>
-        </figure>
-        <h3>
-          {{ blog.title }}<span>{{ friendlyDate(blog.createdAt) }}</span>
-        </h3>
-        <p>
-          {{ blog.description }}
-        </p>
-      </router-link>
+      <div class="item" v-for="blog in blogs" :key="blog.id">
+        <router-link :to="`/user/${blog.user.id}`">
+          <figcaption class="avatar">
+            <img :src="blog.user.avatar" :alt="blog.user.username" />
+            <figcaption>{{ blog.user.username }}</figcaption>
+          </figcaption>
+        </router-link>
+        <router-link :to="`/detail/${blog.id}`">
+          <h3>
+            {{ blog.title }}<span>{{ friendlyDate(blog.createdAt) }}</span>
+          </h3>
+          <p>
+            {{ blog.description }}
+          </p>
+        </router-link>
+        <div></div>
+      </div>
     </section>
     <section class="pagination">
       <!-- element-ui 分页组件 -->
       <el-pagination
         layout="prev,pager,next"
-        :total="total"
+        :total="total / 2"
         @current-change="onPageChange"
       >
       </el-pagination>

@@ -13,7 +13,7 @@
     </template>
     <!-- 登录状态 -->
     <template v-if="isLogin">
-      <h1><router-link to="/"> Let's share</router-link></h1>
+      <h1><router-link to="/">Let's share</router-link></h1>
       <router-link to="/create"><i class="edit el-icon-plus"></i></router-link>
       <div class="user">
         <img
@@ -24,7 +24,7 @@
         />
         <ul>
           <li><router-link to="/my">我的</router-link></li>
-          <li><a href="#" @click="onLogout">注销</a></li>
+          <li><a href="#" @click="onLogout">退出</a></li>
         </ul>
       </div>
     </template>
@@ -44,29 +44,30 @@ export default {
 
   computed: {
     //拿到数据
+    // 映射this.isLogin 为 store.state.isLogin  this.user 为 store.state.user
     ...mapGetters(["isLogin", "user"]),
   },
   created() {
-    //拿到checkLogin 执行判断是否登录了
+    //拿到数据未渲染前  使用checkLogin 判断是否登录了
     this.checkLogin();
   },
   methods: {
-    //通过...mapXXX 拿到想用的方法
+    //通过...mapXXX 直接拿到想用的方法
     ...mapActions(["checkLogin", "logout"]),
     onLogout() {
       this.logout();
-      // this.$router.replace("/index");
+      this.$router.replace("/");
     },
   },
 };
 </script>
 
 
-<style lang="less">
+<style lang="less" >
 @import "../assets/base.less";
 
 header.no-login {
-  padding: 0 12% 30px 12%;
+  padding: 0px 12% 30px 12%;
   background: @bgColor;
   display: grid;
   justify-items: center;
@@ -74,17 +75,17 @@ header.no-login {
   h1 {
     color: #fff;
     font-size: 40px;
-    margin: 60px 0 0 0;
+    margin: 20px 0 0 0;
     text-transform: uppercase;
   }
 
   p {
-    margin: 15px 0 0 0;
+    margin: 10px 0 0 0;
     color: #fff;
   }
 
   .btn {
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   button {

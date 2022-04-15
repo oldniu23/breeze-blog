@@ -3,14 +3,14 @@
     <h1>编辑文章</h1>
     <h3>文章标题</h3>
     <el-input v-model="title"></el-input>
-    <p class="msg">限30个字</p>
+    <p class="msg">不少于10字</p>
     <h3>内容简介</h3>
     <el-input
       type="textarea"
       v-model="description"
       :autosize="{ minRows: 2, maxRows: 6 }"
     ></el-input>
-    <p class="msg">限30个字</p>
+    <p class="msg">不少于30字</p>
     <h3>文章内容</h3>
     <!-- :autosize 可自适应 -->
     <el-input
@@ -18,7 +18,7 @@
       v-model="content"
       :autosize="{ minRows: 4, maxRows: 30 }"
     ></el-input>
-    <p class="msg">多多益善</p>
+    <p class="msg">不少于200字</p>
     <p>
       <label>是否展示到首页</label>
       <el-switch
@@ -69,7 +69,7 @@ export default {
         .then((res) => {
           this.$message.success(res.msg);
           //id在res.data里  跳转到对应id的详情页
-          this.$route.push({ path: `/detail/${res.data.id}` });
+          this.$router.push({ path: "/my" });
         });
     },
   },

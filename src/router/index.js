@@ -42,7 +42,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/user/:blogId",
+    path: "/user/:userId",
     component: User,
   },
   {
@@ -62,7 +62,7 @@ const router = new VueRouter({
 
 //导航守卫   每次路由切换都会执行对应的函数  此router就是上边new Router的对象
 
-//遍历上边的路由
+//遍历上边的路由   一些页面需要登录
 router.beforeEach((to, from, next) => {
   //如果匹配到了有meta的路由
   if (to.matched.some((record) => record.meta.requiresAuth)) {

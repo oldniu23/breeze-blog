@@ -27,6 +27,7 @@ const actions = {
   // 传递用户名和密码 得到promise对象
   login({ commit }, { username, password }) {
     return auth.login({ username, password }).then((res) => {
+      //匹配成功就提交commit   设置用户信息和登录状态
       commit("setUser", { user: res.data });
       commit("setLogin", { isLogin: true });
     });
@@ -35,6 +36,7 @@ const actions = {
   async register({ commit }, { username, password }) {
     //res就是then的结果
     let res = await auth.register({ username, password });
+    console.log(res);
     commit("setUser", { user: res.data });
     commit("setLogin", { isLogin: true });
     return res.data;
@@ -45,7 +47,6 @@ const actions = {
     await auth.logout();
     commit("setUser", { user: null });
     commit("setLogin", { isLogin: false });
-    // window.sessionStorage.clear();
   },
 
   //检查是否登录

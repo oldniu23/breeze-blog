@@ -19,8 +19,8 @@
         <h3>{{ blog.title }}</h3>
         <p>{{ blog.description }}</p>
         <div class="actions">
-          <router-link :to="`/edit/${blog.id}`">编辑</router-link>
-          <a href="#" @click.prevent="onDelete(blog.id)">删除</a>
+          <router-link class="edit" :to="`/edit/${blog.id}`">编辑</router-link>
+          <a href="#" @click.prevent="onDelete(blog.id)" class="del">删除</a>
         </div>
       </router-link>
     </section>
@@ -107,7 +107,7 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style lang="less" >
 @import "~@/assets/base.less";
 
 #my,
@@ -171,9 +171,12 @@ export default {
       grid-column: 2;
       grid-row: 3;
       font-size: 12px;
-
-      a {
+      .edit {
         color: @themeLighterColor;
+        padding-right: 4px;
+      }
+      .del {
+        color: rgb(173, 39, 39);
       }
     }
   }

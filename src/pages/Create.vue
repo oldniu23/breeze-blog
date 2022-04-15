@@ -2,23 +2,23 @@
   <div id="edit">
     <h1>创建文章</h1>
     <h3>文章标题</h3>
-    <el-input v-model="title"></el-input>
-    <p class="msg">限30个字</p>
+    <el-input v-model="title" placeholder="请输入10字以上"></el-input>
     <h3>内容简介</h3>
     <el-input
       type="textarea"
       v-model="description"
       :autosize="{ minRows: 2, maxRows: 6 }"
+      placeholder="请输入30字以上"
     ></el-input>
-    <p class="msg">限30个字</p>
     <h3>文章内容</h3>
     <!-- :autosize 可自适应 -->
     <el-input
       type="textarea"
       v-model="content"
       :autosize="{ minRows: 4, maxRows: 30 }"
+      placeholder="请输入200字以上"
     ></el-input>
-    <p class="msg">限30个字</p>
+    <p class="msg">支持markdown语法</p>
     <p>
       <label>是否展示到首页</label>
       <el-switch
@@ -54,7 +54,7 @@ export default {
         .then((res) => {
           this.$message.success(res.msg);
           //id在res.data里  跳转到对应id的详情页
-          this.$route.push({ path: `/detail/${res.data.id}` });
+          this.$router.push({ path: "/my" });
         });
     },
   },

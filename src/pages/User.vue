@@ -44,8 +44,12 @@ export default {
   },
   created() {
     //获取数据
-    this.userId = this.$route.params.userId;
-    blog.getBlogsByUserId(this.userId, { page: this.page }).then((res) => {
+    const userId = this.$route.params.userId;
+    // console.log(userId);
+    // let res = blog.getBlogsByUserId(userId);
+    // console.log(res);
+    // this.blogs = res.data;
+    blog.getBlogsByUserId(userId, { page: this.page }).then((res) => {
       this.page = res.page;
       this.total = res.total;
       this.blogs = res.data;
@@ -139,6 +143,7 @@ export default {
       grid-column: 2;
       grid-row: 2;
       margin-top: 0;
+      overflow: hidden;
     }
 
     .actions {
