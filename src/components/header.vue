@@ -67,6 +67,7 @@ export default {
 @import "../assets/base.less";
 
 header.no-login {
+  // background-image: url(~@/assets/rock.png);
   padding: 0px 12% 30px 12%;
   background: @bgColor;
   display: grid;

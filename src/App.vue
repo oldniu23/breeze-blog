@@ -34,6 +34,7 @@ export default {
     grid-area: header;
     padding-left: 12%;
     padding-right: 12%;
+    // background-image: url(~@/assets/rock2.png);
   }
 
   #main {

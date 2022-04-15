@@ -8,7 +8,6 @@ import Create from "@/pages/Create.vue";
 import Register from "@/pages/Register.vue";
 import User from "@/pages/User.vue";
 import My from "@/pages/My.vue";
-import NotFound from "@/pages/NotFound.vue";
 import store from "@/store";
 
 Vue.use(VueRouter);
